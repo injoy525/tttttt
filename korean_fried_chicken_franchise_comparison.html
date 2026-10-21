@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korean Fried-Chicken Franchise Comparison | BBQ vs. BHC vs. Kyochon</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              amber: '#F59E0B',
+              orange: '#EA580C',
+              red: '#DC2626',
+              bbq: '#D97706',
+              bhc: '#2563EB',
+              kyochon: '#16A34A',
+              dark: '#0F172A',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans KR"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .gradient-hero {
+      background: linear-gradient(135deg, #1E293B 0%, #0F172A 50%, #451A03 100%);
+    }
+    .card-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .dark .card-glass {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(51, 65, 85, 0.8);
+    }
+    .tab-active {
+      background-color: #EA580C;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+    }
+    /* Smooth progress bar transitions */
+    .bar-transition {
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+  <!-- TOP HEADER / NAV BAR -->
+  <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-white font-black text-xl shadow-md">
+          <i class="fa-solid font-bold fa-drumstick-bite"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white">K-Chicken</span>
+          <span class="text-xs font-semibold px-2 py-0.5 ml-2 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-700">2024 Data</span>
+        </div>
+      </div>
+
+      <!-- Controls: Language Toggle & Theme Switch -->
+      <div class="flex items-center space-x-3">
+        <!-- Language Switcher -->
+        <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-3 py-1.5 rounded-md transition-all duration-200 shadow-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white">
+            EN
+          </button>
+          <button id="lang-ko" onclick="setLanguage('ko')" class="px-3 py-1.5 rounded-md transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+            한국어
+          </button>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button onclick="toggleDarkMode()" class="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon dark:hidden text-slate-700"></i>
+          <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="gradient-hero text-white py-12 lg:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center space-x-2 bg-amber-500/20 border border-amber-400/30 backdrop-blur-md px-3.5 py-1.5 rounded-full text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span data-i18n="heroBadge">Franchise Network Analytics</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4" data-i18n="heroTitle">
+          Korean Fried-Chicken Franchise Comparison
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 font-medium mb-6" data-i18n="heroSubtitle">
+          BBQ vs. BHC vs. Kyochon Chicken — Comprehensive 2024 Domestic Store Count Analysis
+        </p>
+
+        <!-- Dynamic Metric Banner -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 flex items-center space-x-3">
+            <div class="p-2.5 bg-amber-500/20 text-amber-400 rounded-lg">
+              <i class="fa-solid fa-store text-xl"></i>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium" data-i18n="metricFocus">Comparison Focus</p>
+              <p class="text-sm font-bold text-slate-100" data-i18n="metricFocusVal">Store Count (Locations)</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 flex items-center space-x-3">
+            <div class="p-2.5 bg-blue-500/20 text-blue-400 rounded-lg">
+              <i class="fa-solid fa-calendar-check text-xl"></i>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium" data-i18n="metricBaseYear">Official Base Year</p>
+              <p class="text-sm font-bold text-slate-100" data-i18n="metricBaseYearVal">2024 (Audited KFTC)</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 flex items-center space-x-3">
+            <div class="p-2.5 bg-emerald-500/20 text-emerald-400 rounded-lg">
+              <i class="fa-solid fa-shield-halved text-xl"></i>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium" data-i18n="metricMethod">Methodology</p>
+              <p class="text-sm font-bold text-slate-100" data-i18n="metricMethodVal">Single Metric Rigor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+    <!-- SECTION 1: INTRODUCTION & METHODOLOGY -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          1
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="introTitle">
+          Introduction & Methodology
+        </h2>
+      </div>
+      <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-base">
+        <p data-i18n="introP1">
+          This guide compares three major Korean fried-chicken franchise brands: <strong>BBQ</strong>, <strong>BHC</strong>, and <strong>Kyochon Chicken</strong>. The primary comparison criterion is the total number of physical franchise locations operated within South Korea.
+        </p>
+        <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl">
+          <p class="text-sm text-amber-900 dark:text-amber-200 font-medium" data-i18n="introP2">
+            <strong>Fair Standard Principle:</strong> To maintain strict analytical accuracy, all three brands are evaluated using the same standardized base year: <strong>2024</strong>. The numbers presented reflect store outlet count only and do not measure total corporate revenue, market valuation, or average sales per individual franchise unit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: BRAND INTRODUCTIONS (3 CARDS) -->
+    <section>
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          2
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="brandsTitle">
+          Brand Profiles (2024 Network Size)
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- BBQ Card -->
+        <div class="card-glass rounded-2xl p-6 shadow-sm border-t-4 border-amber-500 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300">
+                #1 Largest Network
+              </span>
+              <i class="fa-solid fa-crown text-amber-500 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">BBQ (Genesis BBQ)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-i18n="bbqSub">Genesis BBQ Group</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6" data-i18n="bbqDesc">
+              BBQ is a leading Korean fried-chicken franchise. It commanded <strong>2,316 franchise locations</strong> in South Korea in 2024, representing the largest single store network among the top three brands.
+            </p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800/80 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="2024CountLabel">2024 Franchise Outlets</span>
+            <span class="text-lg font-extrabold text-amber-600 dark:text-amber-400">2,316</span>
+          </div>
+        </div>
+
+        <!-- BHC Card -->
+        <div class="card-glass rounded-2xl p-6 shadow-sm border-t-4 border-blue-500 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300">
+                #2 Close Competitor
+              </span>
+              <i class="fa-solid fa-fire text-blue-500 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">BHC</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-i18n="bhcSub">BHC Chicken</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6" data-i18n="bhcDesc">
+              BHC is a major domestic chicken franchise competitor. It maintained <strong>2,228 franchise locations</strong> in South Korea in 2024, operating a network slightly smaller than BBQ's by 88 outlets.
+            </p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800/80 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="2024CountLabel">2024 Franchise Outlets</span>
+            <span class="text-lg font-extrabold text-blue-600 dark:text-blue-400">2,228</span>
+          </div>
+        </div>
+
+        <!-- Kyochon Card -->
+        <div class="card-glass rounded-2xl p-6 shadow-sm border-t-4 border-emerald-500 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">
+                #3 Major Brand
+              </span>
+              <i class="fa-solid fa-award text-emerald-500 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Kyochon Chicken</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-i18n="kyochonSub">Kyochon F&B</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6" data-i18n="kyochonDesc">
+              Kyochon Chicken is a household name in Korea. It operated <strong>1,361 franchise locations</strong> in 2024, maintaining a strong brand footprint despite having fewer outlets than BBQ and BHC.
+            </p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800/80 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="2024CountLabel">2024 Franchise Outlets</span>
+            <span class="text-lg font-extrabold text-emerald-600 dark:text-emerald-400">1,361</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE COMPARISON TABLE WITH SORTING & DATA DATASET TOGGLE -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+            3
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="tableTitle">
+            Interactive Comparison Table
+          </h2>
+        </div>
+
+        <!-- Metric Switcher Tabs -->
+        <div class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold">
+          <button id="view-2024" onclick="setDataSet('2024')" class="px-3.5 py-2 rounded-lg transition tab-active">
+            <i class="fa-solid fa-circle-check mr-1.5"></i>
+            <span data-i18n="tab2024">2024 FTC Official Data</span>
+          </button>
+          <button id="view-2026" onclick="setDataSet('2026')" class="px-3.5 py-2 rounded-lg transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+            <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
+            <span data-i18n="tab2026">2026 Jumpo Unverified</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sorting Controls Bar -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/60 gap-3 mb-6">
+        <div class="text-xs text-slate-500 dark:text-slate-400 font-medium" id="sortingStatusMsg" data-i18n="sortNote">
+          Click buttons to dynamically sort verified store counts. Unverified non-numerical data will be safeguarded.
+        </div>
+        <div class="flex items-center space-x-2 w-full sm:w-auto">
+          <button id="btn-sort-desc" onclick="sortTable('desc')" class="flex-1 sm:flex-none px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm">
+            <i class="fa-solid fa-arrow-down-9-1"></i>
+            <span data-i18n="btnDesc">Highest to Lowest</span>
+          </button>
+          <button id="btn-sort-asc" onclick="sortTable('asc')" class="flex-1 sm:flex-none px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm">
+            <i class="fa-solid fa-arrow-up-1-9"></i>
+            <span data-i18n="btnAsc">Lowest to Highest</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+        <table class="w-full text-left border-collapse min-w-[600px]">
+          <thead>
+            <tr class="bg-slate-100/80 dark:bg-slate-800/80 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+              <th class="py-3.5 px-4" data-i18n="thBrand">Brand</th>
+              <th class="py-3.5 px-4 text-center" data-i18n="thCount">Franchise Locations</th>
+              <th class="py-3.5 px-4" data-i18n="thVisual">Relative Network Scale</th>
+              <th class="py-3.5 px-4 text-center" data-i18n="thUnit">Unit</th>
+              <th class="py-3.5 px-4 text-center" data-i18n="thBaseYear">Base Year</th>
+              <th class="py-3.5 px-4 text-center" data-i18n="thVerification">Verification Status</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-tbody" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm font-medium">
+            <!-- Rows rendered dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 flex items-center space-x-1">
+        <i class="fa-solid fa-circle-info text-amber-500"></i>
+        <span data-i18n="tableSourceNote">Source: Korea Fair Trade Commission (KFTC) franchise disclosure data via Korea JoongAng Daily & ChosunBiz.</span>
+      </p>
+    </section>
+
+    <!-- SECTION 4: KEY FINDINGS -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          4
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="findingsTitle">
+          Key Findings & Analytical Breakdown
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-5">
+          <div class="text-amber-600 dark:text-amber-400 font-extrabold text-2xl mb-2">#1 BBQ</div>
+          <p class="text-sm text-slate-700 dark:text-slate-300" data-i18n="finding1">
+            <strong>Market Leader:</strong> BBQ held the largest domestic footprint with 2,316 locations in 2024.
+          </p>
+        </div>
+
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
+          <div class="text-blue-600 dark:text-blue-400 font-extrabold text-2xl mb-2">-88 Locations</div>
+          <p class="text-sm text-slate-700 dark:text-slate-300" data-i18n="finding2">
+            <strong>BHC Gap:</strong> BHC ranked second with 2,228 locations—a narrow margin of only 88 fewer outlets than BBQ.
+          </p>
+        </div>
+
+        <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
+          <div class="text-emerald-600 dark:text-emerald-400 font-extrabold text-2xl mb-2">-867 Locations</div>
+          <p class="text-sm text-slate-700 dark:text-slate-300" data-i18n="finding3">
+            <strong>Kyochon Difference:</strong> Kyochon operated 1,361 stores, which is 867 fewer locations than BBQ.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-slate-100 dark:bg-slate-800 p-4 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+        <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-2"></i>
+        <span data-i18n="findingsDisclaimer">
+          <strong>Important Analytical Limitation:</strong> These findings evaluate <em>store counts only</em>. They do not imply that a brand earns higher total corporate revenue, achieves greater store-level profitability, or holds higher customer satisfaction.
+        </span>
+      </div>
+    </section>
+
+    <!-- SECTION 5: 2026 UNVERIFIED DATA CALLOUT -->
+    <section class="bg-red-500/10 dark:bg-red-950/30 border border-red-500/30 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+      <div class="flex items-start space-x-4">
+        <div class="p-3 bg-red-500 text-white rounded-xl text-xl shrink-0 mt-1">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2">
+            <h2 class="text-xl font-bold text-red-900 dark:text-red-200" data-i18n="cautionTitle">
+              Important Note Regarding October 2026 Data
+            </h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-red-200 dark:bg-red-900 text-red-800 dark:text-red-300 font-bold uppercase" data-i18n="unverifiedBadge">Unverified Data</span>
+          </div>
+
+          <p class="text-sm text-red-800 dark:text-red-300 leading-relaxed" data-i18n="cautionBody">
+            A commercial franchise portal (Jumpo.shop) updated on October 10, 2026, lists store counts as follows: <strong>BBQ (2,387)</strong>, <strong>BHC (2,262)</strong>, and <strong>Kyochon (1,362)</strong>.
+          </p>
+
+          <div class="bg-white/80 dark:bg-slate-900/80 p-4 rounded-xl text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2 border border-red-200 dark:border-red-900/50">
+            <p data-i18n="cautionP1">
+              <strong>Why this requires caution:</strong> These figures represent web portal listing updates as of October 10, 2026. The underlying official audit accounting period has <em>not been independently confirmed or verified</em> by the Korea Fair Trade Commission (KFTC).
+            </p>
+            <p class="font-bold text-red-600 dark:text-red-400" data-i18n="cautionP2">
+              Therefore, these figures must NOT be reported as officially confirmed year-end 2026 store counts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: SEARCH HISTORY & DIFFERENCES -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          5
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="searchTitle">
+          Search History & Query Comparison
+        </h2>
+      </div>
+
+      <p class="text-sm text-slate-600 dark:text-slate-300 mb-6" data-i18n="searchIntro">
+        To gather and verify this statistical data, four distinct search queries were executed. Below is a detailed breakdown of the query parameters and the structural differences in their search results.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Query 1 -->
+        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/80">
+          <div class="flex items-center space-x-2 text-amber-600 dark:text-amber-400 text-xs font-bold mb-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>QUERY 1</span>
+          </div>
+          <code class="block bg-white dark:bg-slate-900 p-2.5 rounded-lg text-xs text-orange-600 dark:text-orange-400 font-mono mb-3 border border-slate-200 dark:border-slate-800">
+            Korea chicken franchise location count 2024 BBQ BHC Kyochon
+          </code>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="query1Res">
+            <strong>Result Focus:</strong> Retrieved official disclosure figures submitted to the Korea Fair Trade Commission (KFTC). Provided audited, standardized numerical totals for base year 2024.
+          </p>
+        </div>
+
+        <!-- Query 2 -->
+        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/80">
+          <div class="flex items-center space-x-2 text-blue-600 dark:text-blue-400 text-xs font-bold mb-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>QUERY 2</span>
+          </div>
+          <code class="block bg-white dark:bg-slate-900 p-2.5 rounded-lg text-xs text-orange-600 dark:text-orange-400 font-mono mb-3 border border-slate-200 dark:border-slate-800">
+            BBQ vs BHC vs Kyochon store numbers Korea JoongAng Daily
+          </code>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="query2Res">
+            <strong>Result Focus:</strong> Surfaced English-language media analysis detailing the shift in franchise market rankings and context regarding store-level expansion vs revenue metrics.
+          </p>
+        </div>
+
+        <!-- Query 3 -->
+        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/80">
+          <div class="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 text-xs font-bold mb-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>QUERY 3</span>
+          </div>
+          <code class="block bg-white dark:bg-slate-900 p-2.5 rounded-lg text-xs text-orange-600 dark:text-orange-400 font-mono mb-3 border border-slate-200 dark:border-slate-800">
+            ChosunBiz domestic chicken franchise outlets statistics
+          </code>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="query3Res">
+            <strong>Result Focus:</strong> Yielded domestic financial press disclosures confirming Korean domestic outlet totals and distinguishing store count from individual unit sales volume.
+          </p>
+        </div>
+
+        <!-- Query 4 -->
+        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/80">
+          <div class="flex items-center space-x-2 text-purple-600 dark:text-purple-400 text-xs font-bold mb-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>QUERY 4</span>
+          </div>
+          <code class="block bg-white dark:bg-slate-900 p-2.5 rounded-lg text-xs text-orange-600 dark:text-orange-400 font-mono mb-3 border border-slate-200 dark:border-slate-800">
+            Jumpo.shop 2026 chicken franchise rankings store count
+          </code>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="query4Res">
+            <strong>Result Focus:</strong> Showcased real-time commercial listing portal updates (dated Oct 10, 2026). Identified unverified figures requiring analytical caveat disclaimers.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: VERIFIED SOURCES & REFERENCES -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          6
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="sourcesTitle">
+          Verified Research Sources
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Source 1 -->
+        <a href="https://koreajoongangdaily.joins.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition group">
+          <div class="flex items-center space-x-3">
+            <div class="p-2.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg">
+              <i class="fa-solid fa-newspaper text-lg"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
+                Korea JoongAng Daily
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="src1">Chicken franchise locations in 2024</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200"></i>
+        </a>
+
+        <!-- Source 2 -->
+        <a href="https://biz.chosun.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition group">
+          <div class="flex items-center space-x-3">
+            <div class="p-2.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-lg">
+              <i class="fa-solid fa-chart-line text-lg"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
+                ChosunBiz
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="src2">Domestic chicken franchise outlets statistics</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200"></i>
+        </a>
+
+        <!-- Source 3 -->
+        <a href="https://franchise.ftc.go.kr" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition group">
+          <div class="flex items-center space-x-3">
+            <div class="p-2.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-lg">
+              <i class="fa-solid fa-building-columns text-lg"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
+                Korea Fair Trade Commission (KFTC)
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="src3">Official franchise disclosure statistics portal</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200"></i>
+        </a>
+
+        <!-- Source 4 -->
+        <a href="https://jumpo.shop" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition group">
+          <div class="flex items-center space-x-3">
+            <div class="p-2.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-lg">
+              <i class="fa-solid fa-globe text-lg"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
+                Jumpo.shop
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="src4">2026 Chicken Franchise Rankings (Unverified)</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 8: CONCLUSION -->
+    <section class="card-glass rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold">
+          7
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="conclusionTitle">
+          Conclusion
+        </h2>
+      </div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base" data-i18n="conclusionP">
+        Using the standardized 2024 base year and store location count metric, <strong>BBQ possessed the largest franchise network</strong> in South Korea, followed closely by <strong>BHC</strong> and <strong>Kyochon Chicken</strong>. Objective business comparisons require using identical metrics and explicitly stating data base years. Store location count and average revenue per store represent distinct business dimensions and must not be conflated into a single ranking.
+      </p>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-white dark:bg-slate-900 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4">
+      <p data-i18n="footerText">Korean Fried-Chicken Franchise Comparison Dashboard © 2026. Built for analytical rigor and transparency.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT: DATA & INTERACTION LOGIC -->
+  <script>
+    // BILINGUAL TEXT TRANSLATIONS
+    const translations = {
+      en: {
+        heroBadge: "Franchise Network Analytics",
+        heroTitle: "Korean Fried-Chicken Franchise Comparison",
+        heroSubtitle: "BBQ vs. BHC vs. Kyochon Chicken — Comprehensive 2024 Domestic Store Count Analysis",
+        metricFocus: "Comparison Focus",
+        metricFocusVal: "Store Count (Locations)",
+        metricBaseYear: "Official Base Year",
+        metricBaseYearVal: "2024 (Audited KFTC)",
+        metricMethod: "Methodology",
+        metricMethodVal: "Single Metric Rigor",
+        introTitle: "1. Introduction & Methodology",
+        introP1: "This guide compares three major Korean fried-chicken franchise brands: BBQ, BHC, and Kyochon Chicken. The primary comparison criterion is the total number of physical franchise locations operated within South Korea.",
+        introP2: "Fair Standard Principle: To maintain strict analytical accuracy, all three brands are evaluated using the same standardized base year: 2024. The numbers presented reflect store outlet count only and do not measure total corporate revenue, market valuation, or average sales per individual franchise unit.",
+        brandsTitle: "2. Brand Profiles (2024 Network Size)",
+        bbqSub: "Genesis BBQ Group",
+        bbqDesc: "BBQ is a leading Korean fried-chicken franchise. It commanded 2,316 franchise locations in South Korea in 2024, representing the largest single store network among the top three brands.",
+        bhcSub: "BHC Chicken",
+        bhcDesc: "BHC is a major domestic chicken franchise competitor. It maintained 2,228 franchise locations in South Korea in 2024, operating a network slightly smaller than BBQ's by 88 outlets.",
+        kyochonSub: "Kyochon F&B",
+        kyochonDesc: "Kyochon Chicken is a household name in Korea. It operated 1,361 franchise locations in 2024, maintaining a strong brand footprint despite having fewer outlets than BBQ and BHC.",
+        "2024CountLabel": "2024 Franchise Outlets",
+        tableTitle: "3. Interactive Comparison Table",
+        tab2024: "2024 FTC Official Data",
+        tab2026: "2026 Jumpo Unverified",
+        sortNote: "Click buttons to dynamically sort verified store counts. Unverified non-numerical data will be safeguarded.",
+        btnDesc: "Highest to Lowest",
+        btnAsc: "Lowest to Highest",
+        thBrand: "Brand",
+        thCount: "Franchise Locations",
+        thVisual: "Relative Network Scale",
+        thUnit: "Unit",
+        thBaseYear: "Base Year",
+        thVerification: "Verification Status",
+        tableSourceNote: "Source: Korea Fair Trade Commission (KFTC) franchise disclosure data via Korea JoongAng Daily & ChosunBiz.",
+        findingsTitle: "4. Key Findings & Analytical Breakdown",
+        finding1: "Market Leader: BBQ held the largest domestic footprint with 2,316 locations in 2024.",
+        finding2: "BHC Gap: BHC ranked second with 2,228 locations—a narrow margin of only 88 fewer outlets than BBQ.",
+        finding3: "Kyochon Difference: Kyochon operated 1,361 stores, which is 867 fewer locations than BBQ.",
+        findingsDisclaimer: "Important Analytical Limitation: These findings evaluate store counts only. They do not imply that a brand earns higher total corporate revenue, achieves greater store-level profitability, or holds higher customer satisfaction.",
+        cautionTitle: "5. Important Note Regarding October 2026 Data",
+        unverifiedBadge: "Unverified Data",
+        cautionBody: "A commercial franchise portal (Jumpo.shop) updated on October 10, 2026, lists store counts as follows: BBQ (2,387), BHC (2,262), and Kyochon (1,362).",
+        cautionP1: "Why this requires caution: These figures represent web portal listing updates as of October 10, 2026. The underlying official audit accounting period has not been independently confirmed or verified by the Korea Fair Trade Commission (KFTC).",
+        cautionP2: "Therefore, these figures must NOT be reported as officially confirmed year-end 2026 store counts.",
+        searchTitle: "6. Search History & Query Comparison",
+        searchIntro: "To gather and verify this statistical data, four distinct search queries were executed. Below is a detailed breakdown of the query parameters and the structural differences in their search results.",
+        query1Res: "Result Focus: Retrieved official disclosure figures submitted to the Korea Fair Trade Commission (KFTC). Provided audited, standardized numerical totals for base year 2024.",
+        query2Res: "Result Focus: Surfaced English-language media analysis detailing the shift in franchise market rankings and context regarding store-level expansion vs revenue metrics.",
+        query3Res: "Result Focus: Yielded domestic financial press disclosures confirming Korean domestic outlet totals and distinguishing store count from individual unit sales volume.",
+        query4Res: "Result Focus: Showcased real-time commercial listing portal updates (dated Oct 10, 2026). Identified unverified figures requiring analytical caveat disclaimers.",
+        sourcesTitle: "7. Verified Research Sources",
+        src1: "Chicken franchise locations in 2024",
+        src2: "Domestic chicken franchise outlets statistics",
+        src3: "Official franchise disclosure statistics portal",
+        src4: "2026 Chicken Franchise Rankings (Unverified Portal Data)",
+        conclusionTitle: "8. Conclusion",
+        conclusionP: "Using the standardized 2024 base year and store location count metric, BBQ possessed the largest franchise network in South Korea, followed closely by BHC and Kyochon Chicken. Objective business comparisons require using identical metrics and explicitly stating data base years. Store location count and average revenue per store represent distinct business dimensions and must not be conflated into a single ranking.",
+        footerText: "Korean Fried-Chicken Franchise Comparison Dashboard © 2026. Built for analytical rigor and transparency.",
+        statusAudited: "KFTC Official",
+        statusUnverified: "Unverified Portal"
+      },
+      ko: {
+        heroBadge: "프랜차이즈 가맹점 네트워크 분석",
+        heroTitle: "한국 치킨 프랜차이즈 비교 분석",
+        heroSubtitle: "BBQ vs. BHC vs. 교촌치킨 — 2024년 국내 가맹점 수 기준 데이터 분석",
+        metricFocus: "주요 비교 지표",
+        metricFocusVal: "국내 가맹점 수 (개소)",
+        metricBaseYear: "공식 기준 연도",
+        metricBaseYearVal: "2024년 (공정위 정보공개서)",
+        metricMethod: "비교 원칙",
+        metricMethodVal: "동일 지표/동일 연도 엄수",
+        introTitle: "1. 소개 및 비교 원칙",
+        introP1: "이 가이드는 한국의 주요 치킨 프랜차이즈 브랜드인 BBQ, BHC, 교촌치킨을 비교합니다. 주요 비교 기준은 대한민국 내 가맹점 수입니다.",
+        introP2: "공정한 비교 원칙: 정확한 비교를 위해 세 브랜드 모두 동일한 기준 연도인 2024년의 데이터를 사용합니다. 이 수치는 가맹점 수를 나타내며, 기업 매출이나 가맹점당 평균 매출을 의미하지 않습니다.",
+        brandsTitle: "2. 브랜드 소개 (2024년 가맹점 현황)",
+        bbqSub: "제너시스BBQ 그룹",
+        bbqDesc: "BBQ는 한국의 대표적인 치킨 프랜차이즈 브랜드입니다. 2024년 국내 가맹점 수는 2,316개로, 비교 대상 세 브랜드 중 가장 많은 가맹점 네트워크를 보유하고 있습니다.",
+        bhcSub: "BHC 치킨",
+        bhcDesc: "BHC는 주요 치킨 프랜차이즈 브랜드입니다. 2024년 국내 가맹점 수는 2,228개로, BBQ보다 88개 적은 근소한 차이로 뒤를 잇고 있습니다.",
+        kyochonSub: "교촌에프앤비",
+        kyochonDesc: "교촌치킨은 높은 브랜드 인지도를 가진 치킨 프랜차이즈 브랜드입니다. 2024년 국내 가맹점 수는 1,361개로 BBQ와 BHC에 비해 가맹점 수가 적습니다.",
+        "2024CountLabel": "2024년 국내 가맹점 수",
+        tableTitle: "3. 비교표 (동적 정렬 및 데이터 전환)",
+        tab2024: "2024년 공정위 공식 데이터",
+        tab2026: "2026년 점포웹 미확인 데이터",
+        sortNote: "버튼을 클릭하면 숫자 데이터를 기준으로 오름차순/내림차순 정렬됩니다. 수치가 확인되지 않은 데이터는 유효한 정렬을 유지합니다.",
+        btnDesc: "높은 순 (내림차순)",
+        btnAsc: "낮은 순 (오름차순)",
+        thBrand: "브랜드명",
+        thCount: "국내 가맹점 수",
+        thVisual: "상대적 가맹점 규모",
+        thUnit: "단위",
+        thBaseYear: "기준 연도",
+        thVerification: "데이터 검증 상태",
+        tableSourceNote: "출처: 공정거래위원회 가맹사업 정보공개서 자료 (Korea JoongAng Daily 및 ChosunBiz 보도 종합)",
+        findingsTitle: "4. 주요 결과 및 시사점",
+        finding1: "가맹점 수 1위 BBQ: BBQ는 2024년 기준 2,316개 가맹점으로 가장 넓은 네트워크를 확보했습니다.",
+        finding2: "BHC와의 차이: BHC는 2,228개로 BBQ보다 88개 적어 2위를 기록했습니다.",
+        finding3: "교촌치킨과의 차이: 교촌치킨은 1,361개로 BBQ보다 867개 적은 가맹점을 보유했습니다.",
+        findingsDisclaimer: "분석상의 주의사항: 이 결과는 오직 '가맹점 수'만 비교한 것입니다. 특정 브랜드가 매출이 더 높거나, 가맹점당 수익성이 뛰어나다는 의미로 확대 해석해서는 안 됩니다.",
+        cautionTitle: "5. 2026년 데이터에 대한 참고 사항",
+        unverifiedBadge: "미확인 데이터",
+        cautionBody: "2026년 10월 10일 업데이트된 프랜차이즈 순위 웹사이트(Jumpo.shop)에서는 BBQ 2,387개, BHC 2,262개, 교촌치킨 1,362개로 표시됩니다.",
+        cautionP1: "주의가 필요한 이유: 위 수치는 해당 웹사이트 페이지 기준일에 표시된 값일 뿐이며, 공정거래위원회를 통해 실제 집계 기간이나 기준이 독립적으로 확인되지 않았습니다.",
+        cautionP2: "따라서 이 수치를 2026년 연말 기준 확정 가맹점 수로 표현하거나 공식 통계로 인용해서는 안 됩니다.",
+        searchTitle: "6. 검색 기록 및 쿼리 결과 비교",
+        searchIntro: "정확한 통계 확인을 위해 4가지 검색 쿼리를 실행하였으며, 쿼리별 검색 결과의 특징과 차이점은 다음과 같습니다.",
+        query1Res: "검색 결과 특징: 공정거래위원회(KFTC) 정보공개서 공식 수치 수집. 2024년 기준 검증된 가맹점 수 확인.",
+        query2Res: "검색 결과 특징: Korea JoongAng Daily 영문 보도 분석. 가맹점 수와 기업 매출 간의 차이점 및 순위 변동 맥락 파악.",
+        query3Res: "검색 결과 특징: ChosunBiz 국내 경제지 보도 수집. 국내 매장 현황 및 평균 매출 지표 분리 검증.",
+        query4Res: "검색 결과 특징: Jumpo.shop 실시간 점포 포털 수치 수집. 2026년 10월 기준 포털 수치의 미확인 특성 및 한계점 파악.",
+        sourcesTitle: "7. 검증된 출처 및 참고 문헌",
+        src1: "2024년 치킨 프랜차이즈 가맹점 수 보도",
+        src2: "국내 치킨 프랜차이즈 가맹점 현황 기사",
+        src3: "공정거래위원회 공식 가맹사업 통계 포털",
+        src4: "2026년 치킨 프랜차이즈 순위 (미확인 포털 데이터)",
+        conclusionTitle: "8. 결론",
+        conclusionP: "동일한 2024년 기준과 가맹점 수 지표를 적용하면 BBQ가 가장 많은 가맹점을 보유하고 있으며 BHC와 교촌치킨이 그 뒤를 잇습니다. 공정한 기업 비교를 위해서는 반드시 동일한 지표와 명확한 기준 연도를 제시해야 합니다. 가맹점 수와 가맹점당 평균 매출은 서로 다른 경영 지표이므로 하나의 순위에 혼합해서는 안 됩니다.",
+        footerText: "한국 치킨 프랜차이즈 비교 대시보드 © 2026. 공정하고 객관적인 데이터 비교 제공.",
+        statusAudited: "공정위 공식검증",
+        statusUnverified: "포털 미확인"
+      }
+    };
+
+    // RAW DATASETS
+    const rawData = {
+      "2024": [
+        { brand: "BBQ", count: 2316, unit: "Locations", year: "2024", verified: true },
+        { brand: "BHC", count: 2228, unit: "Locations", year: "2024", verified: true },
+        { brand: "Kyochon Chicken", count: 1361, unit: "Locations", year: "2024", verified: true }
+      ],
+      "2026": [
+        { brand: "BBQ", count: 2387, unit: "Locations", year: "2026 (Oct 10)", verified: false, note: "Unverified" },
+        { brand: "BHC", count: 2262, unit: "Locations", year: "2026 (Oct 10)", verified: false, note: "Unverified" },
+        { brand: "Kyochon Chicken", count: 1362, unit: "Locations", year: "2026 (Oct 10)", verified: false, note: "Unverified" }
+      ]
+    };
+
+    // APP STATE
+    let currentLang = 'en';
+    let currentDataSet = '2024';
+    let sortDirection = 'desc'; // 'desc' or 'asc'
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check system dark mode preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+      renderTable();
+    });
+
+    // LANGUAGE TOGGLE FUNCTION
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      // Update toggle buttons styling
+      const btnEn = document.getElementById('lang-en');
+      const btnKo = document.getElementById('lang-ko');
+
+      if (lang === 'en') {
+        btnEn.className = "px-3 py-1.5 rounded-md transition-all duration-200 shadow-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-bold";
+        btnKo.className = "px-3 py-1.5 rounded-md transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      } else {
+        btnKo.className = "px-3 py-1.5 rounded-md transition-all duration-200 shadow-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-bold";
+        btnEn.className = "px-3 py-1.5 rounded-md transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      }
+
+      // Replace DOM text content based on data-i18n attributes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      // Re-render table to reflect translated units/labels
+      renderTable();
+    }
+
+    // DARK MODE TOGGLE
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // DATASET SWITCHER (2024 vs 2026)
+    function setDataSet(datasetKey) {
+      currentDataSet = datasetKey;
+      
+      const btn2024 = document.getElementById('view-2024');
+      const btn2026 = document.getElementById('view-2026');
+
+      if (datasetKey === '2024') {
+        btn2024.className = "px-3.5 py-2 rounded-lg transition tab-active";
+        btn2026.className = "px-3.5 py-2 rounded-lg transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      } else {
+        btn2026.className = "px-3.5 py-2 rounded-lg transition tab-active !bg-red-600";
+        btn2024.className = "px-3.5 py-2 rounded-lg transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      }
+
+      renderTable();
+    }
+
+    // SORTING FUNCTION WITH NUMERICAL SAFEGUARD
+    function sortTable(direction) {
+      sortDirection = direction;
+      
+      // Style active sort buttons
+      const btnDesc = document.getElementById('btn-sort-desc');
+      const btnAsc = document.getElementById('btn-sort-asc');
+
+      if (direction === 'desc') {
+        btnDesc.className = "flex-1 sm:flex-none px-4 py-2 bg-slate-900 text-white dark:bg-slate-700 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm ring-2 ring-amber-500";
+        btnAsc.className = "flex-1 sm:flex-none px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm";
+      } else {
+        btnAsc.className = "flex-1 sm:flex-none px-4 py-2 bg-slate-900 text-white dark:bg-slate-700 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm ring-2 ring-amber-500";
+        btnDesc.className = "flex-1 sm:flex-none px-4 py-2 bg-white hover:bg-slate-100 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-bold flex items-center justify-center space-x-2 transition shadow-sm";
+      }
+
+      renderTable();
+    }
+
+    // RENDER TABLE ROWS DYNAMICALLY
+    function renderTable() {
+      const tbody = document.getElementById('comparison-tbody');
+      tbody.innerHTML = '';
+
+      // Clone array to avoid mutating raw data
+      let dataList = [...rawData[currentDataSet]];
+
+      // SAFEGUARDED SORTING LOGIC:
+      // Verifies numerical values exist before performing sort comparison
+      dataList.sort((a, b) => {
+        const valA = typeof a.count === 'number' && !isNaN(a.count) ? a.count : null;
+        const valB = typeof b.count === 'number' && !isNaN(b.count) ? b.count : null;
+
+        // If either value is non-numeric/unverified, handle gracefully without error
+        if (valA === null && valB === null) return 0;
+        if (valA === null) return 1;
+        if (valB === null) return -1;
+
+        return sortDirection === 'desc' ? valB - valA : valA - valB;
+      });
+
+      // Find max count in active set for scaling relative visual progress bars
+      const maxCount = Math.max(...dataList.map(item => (typeof item.count === 'number' ? item.count : 0)));
+
+      dataList.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition";
+
+        // Determine brand badge color & translated brand name
+        let brandColorClass = "text-slate-900 dark:text-white";
+        let barBgClass = "bg-amber-500";
+        let brandDisplay = item.brand;
+
+        if (item.brand.includes('BBQ')) {
+          brandColorClass = "text-amber-600 dark:text-amber-400 font-extrabold";
+          barBgClass = "bg-amber-500";
+        } else if (item.brand.includes('BHC')) {
+          brandColorClass = "text-blue-600 dark:text-blue-400 font-extrabold";
+          barBgClass = "bg-blue-500";
+        } else if (item.brand.includes('Kyochon')) {
+          brandColorClass = "text-emerald-600 dark:text-emerald-400 font-extrabold";
+          barBgClass = "bg-emerald-500";
+          if (currentLang === 'ko') brandDisplay = "교촌치킨";
+        }
+
+        // Percentage for bar chart
+        const pct = maxCount > 0 ? ((item.count / maxCount) * 100).toFixed(1) : 0;
+        const formattedCount = typeof item.count === 'number' ? item.count.toLocaleString() : 'N/A';
+        const unitText = currentLang === 'ko' ? '개' : 'Locations';
+        const statusLabel = item.verified 
+          ? translations[currentLang].statusAudited 
+          : translations[currentLang].statusUnverified;
+
+        const statusBadgeClass = item.verified
+          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700"
+          : "bg-red-100 text-red-800 dark:bg-red-950/80 dark:text-red-300 border-red-300 dark:border-red-700";
+
+        tr.innerHTML = `
+          <td class="py-4 px-4 font-bold ${brandColorClass}">
+            ${brandDisplay}
+          </td>
+          <td class="py-4 px-4 text-center font-extrabold text-base text-slate-900 dark:text-white">
+            ${formattedCount}
+          </td>
+          <td class="py-4 px-4 w-1/3">
+            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+              <div class="${barBgClass} h-2.5 rounded-full bar-transition" style="width: ${pct}%"></div>
+            </div>
+            <span class="text-[10px] text-slate-400 font-mono mt-1 block">${pct}% of top network</span>
+          </td>
+          <td class="py-4 px-4 text-center text-slate-500 dark:text-slate-400 text-xs">
+            ${unitText}
+          </td>
+          <td class="py-4 px-4 text-center font-semibold text-xs text-slate-700 dark:text-slate-300">
+            ${item.year}
+          </td>
+          <td class="py-4 px-4 text-center">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border ${statusBadgeClass}">
+              ${item.verified ? '<i class="fa-solid fa-check mr-1 text-[10px]"></i>' : '<i class="fa-solid fa-triangle-exclamation mr-1 text-[10px]"></i>'}
+              ${statusLabel}
+            </span>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>
